@@ -1,0 +1,20 @@
+{
+  "title": "たむらさんスタンプ",
+  "count": 8,
+  "main": 1,
+  "style": "atsunuri",
+  "reference": "reference.png",
+  "character_note": "黒髪の短髪、丸い黒縁メガネ、紺色のジャケットに白いシャツ。人懐っこい笑顔",
+  "text_style": "手描きの太いマーカー風の日本語文字",
+  "usage": "仕事のグループチャットで使う。丁寧すぎず、フランクすぎず",
+  "stamps": [
+    { "no": 1, "expression": "満面の笑みでサムズアップ", "text": "了解です！" },
+    { "no": 2, "expression": "深々とおじぎ", "text": "ありがとう！" },
+    { "no": 3, "expression": "両手で大きな丸を作る", "text": "OK！" },
+    { "no": 4, "expression": "滝のように泣く", "text": "泣" },
+    { "no": 5, "expression": "コーヒーを持って微笑む", "text": "おつかれさま！" },
+    { "no": 6, "expression": "元気いっぱいに手を振る", "text": "よろしく！" },
+    { "no": 7, "expression": "驚いて目が飛び出る", "text": "まじか" },
+    { "no": 8, "expression": "ハートを抱きしめる", "text": "" }
+  ]
+}

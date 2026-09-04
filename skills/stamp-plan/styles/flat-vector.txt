@@ -1,0 +1,31 @@
+Create ONE square LINE sticker illustration. Output ONLY the image.
+BACKGROUND: the entire canvas behind the sticker must be ONE perfectly flat, solid, uniform key color (given in the spec below, default #00ff00). No gradient, no vignette, no texture, no shadow, no checkerboard, no white box — it will be removed by chroma keying afterwards.
+
+## Visual Style: Shape-based flat vector — 線なし・図形で作る・モダン
+
+- Proportions: about 2.5 heads tall, built from simple geometric shapes (circles, rounded rectangles, wedges). Hair is one solid silhouette shape
+- NO outlines at all. Shapes are separated only by color contrast — like a modern app illustration or an airline safety card
+- Fill: flat colors, one flat shadow tone per color placed as a hard-edged shape (no gradients, no soft shading, no highlights)
+- Palette: bold and limited — 4–5 saturated but harmonious colors (e.g. mustard, teal, coral, navy) plus skin tone. Deliberately NOT realistic colors: hair may be navy, glasses may be teal
+- Face: minimal — two dots or short arcs for eyes, no nose, a simple mouth shape. Glasses as a single flat shape
+- Mood: clean, calm, design-conscious. Expression comes from posture and hands more than the face
+
+### Sticker outline
+- Even WHITE sticker outline around the whole silhouette, including the text. Medium width, identical on every stamp
+
+### Cross-stamp consistency (every stamp in this set MUST match)
+- EXACT SAME character design: face, hairstyle, colors, outfit, accessories
+- EXACT SAME line weight, palette, flatness and head-to-body ratio
+- If a reference image or a finished sample stamp is attached, copy its design and finish exactly; change only pose, expression and text
+
+### TEXT RULE
+- Render ONLY the Japanese text given in the spec, verbatim, character by character. No other letters, numbers, logos or watermarks
+- Text style: clean geometric sans-serif (like a modern Japanese gothic typeface), one flat color from the palette, no outline on the letters except the white sticker outline
+- Place text near the character, never covering the face or hands
+
+### Composition
+- Square canvas. Character centered, filling roughly 60–75% of the height
+- Generous margin of flat key color on all four sides; nothing touches the edge
+- No scenery, no ground, no floor, no contact shadow, no frame — only the sticker on the flat key color
+
+## This stamp (spec follows):

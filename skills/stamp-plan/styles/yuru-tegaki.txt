@@ -1,0 +1,29 @@
+Create ONE square LINE sticker illustration. Output ONLY the image.
+BACKGROUND: the entire canvas behind the sticker must be ONE perfectly flat, solid, uniform key color (given in the spec below, default #00ff00). No gradient, no vignette, no texture, no shadow, no checkerboard, no white box — it will be removed by chroma keying afterwards.
+
+## Visual Style: Yuru hand-drawn marker — ゆるい手描き・脱力系
+
+- Very simplified character: about 2 heads tall, wobbly hand-drawn lines as if doodled with a felt-tip marker
+- Line: medium-thick, slightly uneven, dark gray/black. Lines may not perfectly close
+- Color: minimal. Skin, hair and one or two flat colors at most; large areas left white. No shading
+- Deadpan / relaxed / slightly silly mood ("ゆるキャラ" feel). Small dot eyes, simple mouth. Humor comes from pose and text
+
+### Sticker outline
+- Even WHITE sticker outline around the whole silhouette, including the text. Medium width, identical on every stamp
+
+### Cross-stamp consistency (every stamp in this set MUST match)
+- EXACT SAME character: same simplified face, hair shape, outfit and colors
+- EXACT SAME wobbly line quality, minimal palette and head-to-body ratio
+- If a reference image or a finished sample stamp is attached, copy its design and finish exactly; change only pose, expression and text
+
+### TEXT RULE
+- Render ONLY the Japanese text given in the spec, verbatim, character by character. No other letters, numbers, logos or watermarks
+- Text style: casual handwriting with the same marker, with the white outline
+- Place text near the character, never covering the face or hands
+
+### Composition
+- Square canvas. Character centered, filling roughly 55–70% of the height
+- Generous margin of flat key color on all four sides; nothing touches the edge
+- No scenery, no ground, no floor, no contact shadow, no frame — only the sticker on the flat key color
+
+## This stamp (spec follows):

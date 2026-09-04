@@ -1,0 +1,29 @@
+Create ONE square LINE sticker illustration. Output ONLY the image.
+BACKGROUND: the entire canvas behind the sticker must be ONE perfectly flat, solid, uniform key color (given in the spec below, default #00ff00). No gradient, no vignette, no texture, no shadow, no checkerboard, no white box — it will be removed by chroma keying afterwards.
+
+## Visual Style: Matte clay 3D mascot — クレイ風・やわらか立体
+
+- Chibi mascot: about 2 heads tall, rounded chunky forms as if sculpted from soft modeling clay
+- Matte clay / soft-plastic 3D render: subtle fingerprint-like surface, soft studio lighting from top-left, gentle ambient occlusion, no glossy reflections
+- Palette: warm and friendly, medium saturation, 5–6 colors. Slightly toy-like
+- Clear expressions built from simple 3D shapes (bead eyes, sculpted mouth, eyebrows)
+
+### Sticker outline
+- Thick, even WHITE sticker outline around the whole silhouette, including the text. Identical width on every stamp
+
+### Cross-stamp consistency (every stamp in this set MUST match)
+- EXACT SAME character model: face, hair, colors, outfit, accessories
+- EXACT SAME material, lighting direction, camera angle (slightly above, eye level-ish), and head-to-body ratio
+- If a reference image or a finished sample stamp is attached, copy its design and finish exactly; change only pose, expression and text
+
+### TEXT RULE
+- Render ONLY the Japanese text given in the spec, verbatim, character by character. No other letters, numbers, logos or watermarks
+- Text style: chunky rounded 3D clay letters in one color, with the white outline
+- Place text near the character, never covering the face or hands
+
+### Composition
+- Square canvas. Character centered, filling roughly 60–75% of the height
+- Generous margin of flat key color on all four sides; nothing touches the edge
+- No scenery, no ground, no floor, no contact shadow, no frame — only the sticker on the flat key color
+
+## This stamp (spec follows):

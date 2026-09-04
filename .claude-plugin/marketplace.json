@@ -1,0 +1,13 @@
+{
+  "name": "line-stamp-kit",
+  "owner": {
+    "name": "tamkai"
+  },
+  "plugins": [
+    {
+      "name": "line-stamp-kit",
+      "source": "./",
+      "description": "計画をつくる → スタンプにする の二段階で LINE スタンプ一式を作るキット"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "name": "line-stamp-kit",
+  "displayName": "LINE Stamp Kit",
+  "description": "計画をつくる → スタンプにする の二段階で LINE スタンプ一式（透過PNG・メイン・タブ・申請用zip）を作るキット。画像生成は Codex 組み込みの image_gen を使い、APIキー不要。",
+  "version": "0.1.0",
+  "author": {
+    "name": "tamkai"
+  },
+  "repository": "https://github.com/tamkai/line-stamp-kit"
+}

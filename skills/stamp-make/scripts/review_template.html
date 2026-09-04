@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>スタンプ検収</title>
+<style>
+  :root {
+    --paper: #F7F5F0; --card: #FFFFFF; --line: #E2DED6; --ink: #24211C; --ink-soft: #625C52; --ink-faint: #948D80;
+    --ok: #2F7D4F; --ok-tint: #E4F3EA; --ng: #B4432C; --ng-tint: #FBE9E4; --accent: #2D6BD4; --accent-tint: #E8F0FC;
+    --main: #B07A12; --main-tint: #FBF1D8;
+    --font: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Yu Gothic UI", Meiryo, system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--font); font-size: 15px; line-height: 1.6; padding-bottom: 150px; }
+  header { padding: 28px 32px 8px; }
+  h1 { font-size: 22px; margin: 0 0 4px; }
+  .meta { color: var(--ink-soft); font-size: 13px; display: flex; gap: 18px; flex-wrap: wrap; }
+  .summary { margin: 14px 32px 0; display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+  .pill { padding: 4px 12px; border-radius: 999px; font-size: 13px; font-weight: 600; }
+  .pill.ok { background: var(--ok-tint); color: var(--ok); }
+  .pill.ng { background: var(--ng-tint); color: var(--ng); }
+  .hint { color: var(--ink-soft); font-size: 13px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 18px; padding: 20px 32px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; }
+  .card.ng { border-color: #E9B8AD; }
+  .card.selected { outline: 3px solid var(--accent); outline-offset: -1px; }
+  .thumb { position: relative; aspect-ratio: 1 / 1; display: flex; align-items: center; justify-content: center;
+    background-color: #EEE;
+    background-image: linear-gradient(45deg, #D8D8D8 25%, transparent 25%), linear-gradient(-45deg, #D8D8D8 25%, transparent 25%),
+      linear-gradient(45deg, transparent 75%, #D8D8D8 75%), linear-gradient(-45deg, transparent 75%, #D8D8D8 75%);
+    background-size: 20px 20px; background-position: 0 0, 0 10px, 10px -10px, -10px 0; }
+  .thumb.dark { background-color: #2B2B2B; background-image: linear-gradient(45deg, #3A3A3A 25%, transparent 25%), linear-gradient(-45deg, #3A3A3A 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #3A3A3A 75%), linear-gradient(-45deg, transparent 75%, #3A3A3A 75%); }
+  .thumb.line { background: #7494C0; background-image: none; }
+  .thumb img { max-width: 88%; max-height: 88%; object-fit: contain; }
+  .thumb .missing { color: var(--ink-faint); font-size: 13px; }
+  .badge { position: absolute; top: 8px; left: 8px; font-size: 12px; font-weight: 700; padding: 2px 8px; border-radius: 6px; }
+  .badge.ok { background: var(--ok); color: #fff; }
+  .badge.ng { background: var(--ng); color: #fff; }
+  .badge.main { left: auto; right: 8px; background: var(--main-tint); color: var(--main); }
+  .body { padding: 10px 12px 12px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+  .no { font-weight: 700; font-size: 15px; }
+  .text { font-size: 15px; }
+  .expr { color: var(--ink-soft); font-size: 13px; }
+  .spec { color: var(--ink-faint); font-size: 12px; }
+  .problems { margin: 0; padding: 0 0 0 1.1em; color: var(--ng); font-size: 13px; }
+  .warnings { margin: 0; padding: 0 0 0 1.1em; color: var(--main); font-size: 13px; }
+  .redo { margin-top: auto; display: flex; flex-direction: column; gap: 6px; padding-top: 6px; border-top: 1px dashed var(--line); }
+  .redo label { display: flex; align-items: center; gap: 6px; font-size: 13px; cursor: pointer; }
+  .redo input[type=checkbox] { width: 16px; height: 16px; }
+  .redo textarea { width: 100%; min-height: 44px; font: inherit; font-size: 13px; padding: 6px 8px; border: 1px solid var(--line); border-radius: 6px; resize: vertical; }
+  .toolbar { position: fixed; left: 0; right: 0; bottom: 0; background: var(--card); border-top: 1px solid var(--line); padding: 12px 32px; display: flex; gap: 14px; align-items: flex-start; box-shadow: 0 -8px 24px -18px rgba(0,0,0,.35); }
+  .toolbar textarea { flex: 1; min-height: 64px; max-height: 120px; font: inherit; font-size: 13px; padding: 8px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--paper); }
+  .toolbar .col { display: flex; flex-direction: column; gap: 8px; min-width: 150px; }
+  button { font: inherit; font-size: 14px; padding: 9px 14px; border-radius: 8px; border: 1px solid var(--line); background: var(--card); cursor: pointer; }
+  button.primary { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+  button:disabled { opacity: .5; cursor: default; }
+  .bgsel { display: flex; gap: 6px; align-items: center; font-size: 13px; color: var(--ink-soft); }
+  .bgsel button { padding: 4px 10px; font-size: 12px; }
+  .bgsel button.on { border-color: var(--accent); color: var(--accent); background: var(--accent-tint); }
+  .copied { color: var(--ok); font-size: 12px; min-height: 1em; }
+</style>
+</head>
+<body>
+<header>
+  <h1 id="title">スタンプ検収</h1>
+  <div class="meta">
+    <span id="meta-count"></span>
+    <span id="meta-style"></span>
+    <span id="meta-time"></span>
+  </div>
+</header>
+<div class="summary">
+  <span class="pill ok" id="pill-ok"></span>
+  <span class="pill ng" id="pill-ng"></span>
+  <span class="bgsel">背景:
+    <button data-bg="" class="on">市松</button>
+    <button data-bg="dark">暗</button>
+    <button data-bg="line">LINE風</button>
+  </span>
+  <span class="hint">作り直したいものにチェックを入れ、直したい点をメモしてください。右下の文をコピーして、そのまま貼って伝えれば その番号だけ作り直します。</span>
+</div>
+<div class="grid" id="grid"></div>
+
+<div class="toolbar">
+  <textarea id="out" readonly placeholder="作り直す番号にチェックを入れると、ここに伝える文ができます。"></textarea>
+  <div class="col">
+    <button class="primary" id="copy" disabled>この文をコピー</button>
+    <button id="reload">最新の画像に更新</button>
+    <div class="copied" id="copied"></div>
+  </div>
+</div>
+
+<script>
+const DATA = /*__REVIEW_DATA__*/null;
+const state = { redo: {}, notes: {} };
+const $ = (s) => document.querySelector(s);
+
+function pad(n) { return String(n).padStart(2, "0"); }
+
+function render() {
+  if (!DATA) { $("#grid").textContent = "review.json のデータが埋め込まれていません。check_stamps.py から生成してください。"; return; }
+  $("#title").textContent = (DATA.title ? DATA.title + " — " : "") + "スタンプ検収";
+  $("#meta-count").textContent = `全 ${DATA.count} 個 / メイン ${pad(DATA.main)}`;
+  $("#meta-style").textContent = DATA.style ? `絵柄: ${DATA.style}` : "";
+  $("#meta-time").textContent = `検査: ${DATA.generated_at.replace("T", " ").slice(0, 16)}`;
+  const ng = DATA.count - DATA.ok_count;
+  $("#pill-ok").textContent = `OK ${DATA.ok_count}`;
+  $("#pill-ng").textContent = `NG ${ng}`;
+  $("#pill-ng").hidden = ng === 0;
+
+  const grid = $("#grid");
+  grid.innerHTML = "";
+  for (const it of DATA.items) {
+    const card = document.createElement("div");
+    card.className = "card" + (it.ok ? "" : " ng");
+    card.dataset.no = it.no;
+    const src = it.exists ? `${it.file}?t=${it.mtime || 0}` : "";
+    const spec = it.exists ? `${it.width}×${it.height} ${it.mode} ${it.kb}KB` + (it.transparent_ratio != null ? ` 透過${Math.round(it.transparent_ratio * 100)}%` : "") : "";
+    card.innerHTML = `
+      <div class="thumb">
+        ${it.exists ? `<img src="${src}" alt="">` : `<span class="missing">まだ生成されていません</span>`}
+        <span class="badge ${it.ok ? "ok" : "ng"}">${it.ok ? "OK" : "NG"}</span>
+        ${it.no === DATA.main ? `<span class="badge main">メイン</span>` : ""}
+      </div>
+      <div class="body">
+        <div class="no">${pad(it.no)} <span class="text">${it.text ? "「" + esc(it.text) + "」" : "（文字なし）"}</span></div>
+        <div class="expr">${esc(it.expression)}</div>
+        <div class="spec">${spec}</div>
+        ${it.problems.length ? `<ul class="problems">${it.problems.map((p) => `<li>${esc(p)}</li>`).join("")}</ul>` : ""}
+        ${(it.warnings || []).length ? `<ul class="warnings">${it.warnings.map((p) => `<li>${esc(p)}</li>`).join("")}</ul>` : ""}
+        <div class="redo">
+          <label><input type="checkbox" data-redo="${it.no}" ${(!it.ok) ? "checked" : ""}> 作り直す</label>
+          <textarea data-note="${it.no}" placeholder="直したい点（任意）例: 目をもっと大きく / 文字が読みにくい"></textarea>
+        </div>
+      </div>`;
+    grid.appendChild(card);
+    if (!it.ok) state.redo[it.no] = true;
+  }
+  grid.querySelectorAll("input[data-redo]").forEach((cb) => cb.addEventListener("change", (e) => {
+    state.redo[+e.target.dataset.redo] = e.target.checked; update();
+  }));
+  grid.querySelectorAll("textarea[data-note]").forEach((ta) => ta.addEventListener("input", (e) => {
+    state.notes[+e.target.dataset.note] = e.target.value; update();
+  }));
+  update();
+}
+
+function esc(s) { return String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c])); }
+
+function update() {
+  const nos = DATA.items.map((it) => it.no).filter((n) => state.redo[n]);
+  document.querySelectorAll(".card").forEach((c) => c.classList.toggle("selected", !!state.redo[+c.dataset.no]));
+  if (!nos.length) { $("#out").value = ""; $("#copy").disabled = true; return; }
+  const lines = [`${nos.join(", ")} を作り直してください。`];
+  for (const n of nos) {
+    const note = (state.notes[n] || "").trim();
+    const auto = DATA.items.find((it) => it.no === n).problems.filter((p) => !p.startsWith("まだ生成"));
+    const reason = [note, ...(note ? [] : auto)].filter(Boolean).join("。");
+    if (reason) lines.push(`${n}: ${reason}`);
+  }
+  $("#out").value = lines.join("\n");
+  $("#copy").disabled = false;
+}
+
+$("#copy").addEventListener("click", async () => {
+  const text = $("#out").value;
+  try { await navigator.clipboard.writeText(text); }
+  catch { $("#out").select(); document.execCommand("copy"); }
+  $("#copied").textContent = "コピーしました。エージェントに貼ってください。";
+  setTimeout(() => ($("#copied").textContent = ""), 3000);
+});
+$("#reload").addEventListener("click", () => location.reload());
+document.querySelectorAll(".bgsel button").forEach((b) => b.addEventListener("click", () => {
+  document.querySelectorAll(".bgsel button").forEach((x) => x.classList.toggle("on", x === b));
+  document.querySelectorAll(".thumb").forEach((t) => { t.className = "thumb" + (b.dataset.bg ? " " + b.dataset.bg : ""); });
+}));
+render();
+</script>
+</body>
+</html>

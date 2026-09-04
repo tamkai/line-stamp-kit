@@ -1,0 +1,29 @@
+Create ONE square LINE sticker illustration. Output ONLY the image.
+BACKGROUND: the entire canvas behind the sticker must be ONE perfectly flat, solid, uniform key color (given in the spec below, default #00ff00). No gradient, no vignette, no texture, no shadow, no checkerboard, no white box — it will be removed by chroma keying afterwards.
+
+## Visual Style: Bold-outline flat cartoon — 極太線・フラット・ゆるカワ
+
+- Proportions: about 3 heads tall, round head, small stubby body and limbs, rounded mitten-like hands. Friendly, slightly goofy
+- Line: ONE uniform very thick black outline (no line-weight variation, no sketchiness). Every shape is closed and separated by the same heavy line — like a vector mascot or a sticker from a Japanese stationery brand
+- Fill: completely flat colors, NO shading, NO gradients, NO highlights, NO texture. Muted, slightly desaturated palette (cream, off-black, dusty pastels, warm skin). At most 5 colors on the character
+- Face: simple — thick closed-arc eyes or dot eyes, a tiny nose, a big simple mouth. Expression carried by mouth shape and eyebrows
+- Cross-stamp consistency: EXACT SAME line thickness, palette, head-to-body ratio and face grammar on every stamp
+
+### Sticker outline
+- Even WHITE sticker outline (die-cut) around the whole silhouette, including the text. Same width on every stamp
+
+### Cross-stamp consistency (every stamp in this set MUST match)
+- EXACT SAME character design: face, hairstyle, colors, outfit, accessories
+- If a reference image or a finished sample stamp is attached, copy its design and finish exactly; change only pose, expression and text
+
+### TEXT RULE
+- Render ONLY the Japanese text given in the spec, verbatim, character by character. No other letters, numbers, logos or watermarks
+- Text style: chunky rounded lettering with the same thick black outline, one flat fill color, with the white sticker outline
+- Place text near the character, never covering the face or hands
+
+### Composition
+- Square canvas. Character centered, filling roughly 60–75% of the height
+- Generous margin of flat key color on all four sides; nothing touches the edge
+- No scenery, no ground, no floor, no contact shadow, no frame — only the sticker on the flat key color
+
+## This stamp (spec follows):
