@@ -94,17 +94,27 @@ def sample_path(workdir: Path, no: int, style: str) -> Path:
     return samples_dir(workdir) / f"stamp_{no:02d}__{style}.png"
 
 
-def resolve_reference(plan: dict, workdir: Path) -> Path | None:
-    """計画の reference（無ければ reference.png 等）を探す。見つからなければ None。"""
+def resolve_references(plan: dict, workdir: Path) -> list[Path]:
+    """計画の reference（文字列でも配列でも可。無ければ reference.png 等）を探す。見つからなければ空。"""
     ref = plan.get("reference")
-    if ref:
-        p = (workdir / ref).resolve() if not Path(ref).is_absolute() else Path(ref)
-        return p if p.exists() else None
+    names = ref if isinstance(ref, list) else ([ref] if ref else [])
+    found: list[Path] = []
+    for r in names:
+        p = (workdir / r).resolve() if not Path(r).is_absolute() else Path(r)
+        if p.exists():
+            found.append(p)
+    if found or names:
+        return found
     for name in REFERENCE_CANDIDATES:
         p = workdir / name
         if p.exists():
-            return p
-    return None
+            return [p]
+    return []
+
+
+def resolve_reference(plan: dict, workdir: Path) -> Path | None:
+    refs = resolve_references(plan, workdir)
+    return refs[0] if refs else None
 
 
 def md5_of(path: Path) -> str:

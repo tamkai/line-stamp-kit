@@ -22,7 +22,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from stamp_common import (  # noqa: E402
-    load_plan, parse_only, prompts_dir, raw_path, resolve_reference, sample_path, stamp_by_no,
+    load_plan, parse_only, prompts_dir, raw_path, resolve_references, sample_path, stamp_by_no,
 )
 
 SKILL_DIR = Path(__file__).resolve().parent.parent          # skills/stamp-make
@@ -134,9 +134,10 @@ def main() -> None:
         reference = Path(args.reference).expanduser().resolve()
         if not reference.exists():
             sys.exit(f"--reference の画像がありません: {reference}")
+        references = [reference]
     else:
-        reference = None if args.no_reference else resolve_reference(plan, workdir)
-    if reference is None and not args.no_reference:
+        references = [] if args.no_reference else resolve_references(plan, workdir)
+    if not references and not args.no_reference:
         print("注意: 参照画像（reference.png など）が見つかりません。文章だけでキャラを指定します。", file=sys.stderr)
 
     main_no = plan.get("main", 1)
@@ -154,11 +155,11 @@ def main() -> None:
 
     for s in targets:
         images: list[dict] = []
-        if reference is not None:
-            images.append({
-                "path": str(reference),
-                "role": "参照画像（キャラクターの見本）。顔・髪型・服・体型・配色はこの人物/キャラから取る",
-            })
+        for k, ref in enumerate(references, 1):
+            role = "参照画像（キャラクターの見本）。顔・髪型・服・体型・配色はこの人物/キャラから取る"
+            if len(references) > 1:
+                role = f"参照画像 {k}/{len(references)}（同一人物の別アングル）。顔立ち・髪型・ひげ・服はこれらを総合して取る"
+            images.append({"path": str(ref), "role": role})
         if anchor is not None and anchor != raw_path(workdir, s["no"]):
             images.append({
                 "path": str(anchor),
@@ -179,7 +180,7 @@ def main() -> None:
 
     print(f"書き出し: {len(targets)} 件 → {pdir}")
     print(f"  スタイル: {style_path}")
-    print(f"  参照画像: {reference if reference else 'なし'}")
+    print(f"  参照画像: {', '.join(str(r) for r in references) if references else 'なし'}")
     print(f"  お手本  : {anchor if anchor else 'なし（メインを先に作ると自動で付きます）'}")
 
 

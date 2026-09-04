@@ -46,7 +46,7 @@ codex plugin add line-stamp-kit@line-stamp-kit
 
 ## 使い方
 
-1. 作業用のフォルダを作り、元にしたい画像を `reference.png`（jpg 可）として置く
+1. 作業用のフォルダを作り、元にしたい画像を `reference.png`（jpg 可）として置く。正面と横顔の 2 枚があると似顔絵の再現度が上がります（計画で `reference` を配列にする）
 2. エージェントにこう話す:
 
 ```
