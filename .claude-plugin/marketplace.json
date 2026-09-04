@@ -3,6 +3,7 @@
   "owner": {
     "name": "tamkai"
   },
+  "description": "計画をつくる → スタンプにする の二段階で LINE スタンプ一式を作るキット（Claude Code / Codex 両対応、APIキー不要）",
   "plugins": [
     {
       "name": "line-stamp-kit",
